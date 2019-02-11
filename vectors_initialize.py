@@ -77,17 +77,21 @@ def vectors_loop_creating():
     vector_input_control = True
     while vector_input_control:
       #print("Please, enter all coordinates of the %d vector:" % vector_counter)
-      print(f'Please, enter all coordinates of the {vector_counter}-vector:')
+      #print(f'Please, enter all coordinates of the {vector_counter}-vector:')
+      #print(f"Please, enter all coordinates of the {vector_counter}-vector:")
+      print("Please, enter all coordinates of the %d-vector" % vector_counter)
       vector = []
       coordinate_counter = 1
       coordinate_input_control = True
       while coordinate_input_control:
         #print("Please, enter %d-st coordinate:" % coordinate_counter)
-        print(f'Please, enter {coordinate_counter}-st coordinate:')
+        #print(f'Please, enter {coordinate_counter}-st coordinate:')
+        print("Please, enter %d-st coordinate:" % coordinate_counter)
         vector.append(int(input(">>>")))
         if len(vector) == 3:
           #print("You almost entered the maximum number of coordinates on the %d-vector." % vector_counter)
-          print(f'You almost entered the maximum number of coordinates on the {vector_counter}-vector. The maximum number of coordinates should be less of equal to 3.')
+          #print(f'You almost entered the maximum number of coordinates on the {vector_counter}-vector. The maximum number of coordinates should be less of equal to 3.')
+          print("You almost entered the maximum number of coordinates on the %d-vector. The maximum number of coordinates should be less of equal to 3." % vector_counter)
           coordinate_input_control = False
           data = vector_loop_max()
           if data == 1:
@@ -113,8 +117,13 @@ def vectors_loop_creating():
 
 #Function for handling all operations on the vectors:
 def vectors_operations_handling(vectors):
-  print('Output 1-th vector:')
-  print(vectors[0])
+  print("You entered vectors with coordinates:")
+  v_counter = 0
+  for vector in vectors:
+    #print(f'{v_counter + 1}: {vector};')
+    print("%d:" % v_counter + 1)
+    print(vector)
+    v_counter = v_counter + 1
 
 #Default parameters for handling execution loop:
 again_exec = True
