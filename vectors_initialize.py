@@ -120,8 +120,7 @@ def vectors_operations_handling(vectors):
   print("You entered vectors with coordinates:")
   v_counter = 0
   for vector in vectors:
-    #print(f'{v_counter + 1}: {vector};')
-    print("%d:" % v_counter + 1)
+    print('{0}: '.format(v_counter + 1))
     print(vector)
     v_counter = v_counter + 1
 
