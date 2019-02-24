@@ -30,6 +30,18 @@ class Vector(object):
         except TypeError:
             raise TypeError('The coordinates must be an iterable')
 
+    def plus(self, v):
+      new_coordinates = [x+y for x,y in zip(self.coordinates, v.coordinates)]
+      return Vector(new_coordinates)
+
+    def minus(self, v):
+      new_coordinates = [x-y for x,y in zip(self.coordinates, v.coordinates)]
+      return Vector(new_coordinates)
+
+    def times_scalar(self, c):
+      new_coordinates = [c*x for x in self.coordinates]
+      return Vector(new_coordinates)
+
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
     
@@ -55,9 +67,13 @@ counter_exec = 0
 while again_exec:
   A = Vector([8.218, -9.341])
   B = Vector([-1.129, 2.111])
-  print('Adding vectors: {0} + {1}'.format(A[0], B[0]))
-  #C = A + B
-  #print(C)
+  print('Adding vectors: {0} + {1} = {2}'.format(A, B, A.plus(B)))
+  A = Vector([7.119, 8.215])
+  B = Vector([-8.223, 0.878])
+  print('Subtracting vectors: {0} - {1} = {2}'.format(A, B, A.minus(B)))
+  A = 7.41
+  B = Vector([1.671, -1.012, -0.318])
+  print('Scalar multiply vector by value: {0} * {1} = {2}'.format(A, B, B.times_scalar(A)))
   again_exec = execution_loop()
   counter_exec = counter_exec + 1
 
