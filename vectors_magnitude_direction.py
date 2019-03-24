@@ -15,6 +15,8 @@ print(
   '-----------------------------------------'\
   )
 
+import math
+
 #Default function for handling execution loop:
 def execution_loop():
   data = int(input("Do you want to try again ? Enter [1] - for continue / [0] - for quit :\n>>>"))
@@ -59,13 +61,23 @@ class Vector(object):
 
         except ValueError:
             raise ValueError('The coordinates must be nonempty')
+            consoe,
 
         except TypeError:
             raise TypeError('The coordinates must be an iterable')
 
     def magnitude(self): 
-      print('Vector output:')
-      print(self)
+        coordinates_squared = [x**2 for x in self.coordinates]
+        return math.sqrt(sum(coordinates_squared))
+
+    def normalized(self):
+      try:
+        magnitude = self.magnitude()
+        return [x * (1 / magnitude) for x in self.coordinates]
+
+      except ZeroDivisionError:
+        raise Exception('Cannot normalize the zero vector.')
+
 
     def __str__(self):
         return 'Vector {}'.format(self.coordinates)
@@ -91,7 +103,7 @@ def vectors_loop_creating():
         #print("Please, enter %d-st coordinate:" % coordinate_counter)
         #print(f'Please, enter {coordinate_counter}-st coordinate:')
         print("Please, enter %d-st coordinate:" % coordinate_counter)
-        vector.append(int(input(">>>")))
+        vector.append(float(input(">>>")))
         if len(vector) == 3:
           #print("You almost entered the maximum number of coordinates on the %d-vector." % vector_counter)
           #print(f'You almost entered the maximum number of coordinates on the {vector_counter}-vector. The maximum number of coordinates should be less of equal to 3.')
@@ -130,8 +142,31 @@ def vectors_operations_handling(vectors):
 
 #Function for calculating magnitude of entered vectors:
 def vectors_magnitude_calc(vectors):
+  index = 1
   for vector in vectors:
-    vector.magnitude()
+    print('Calculations for vector-{0}:\nMagnitude = {1}\nNormalization = {2}'.format(index, vector.magnitude(), vector.normalized()))
+    index += 1
+
+'''
+def vectors_magnitude_calc(vectors):
+  magnitudes = []
+  directions = []
+  c_sum = 0
+  for vector in vectors:
+    for coord in vector.coordinates:
+      c_sum += math.pow(coord, 2)
+    magnitudes.append(math.sqrt(c_sum))
+    direction = []
+    for coord in vector.coordinates:
+      direction.append(coord / math.sqrt(c_sum))
+    directions.append(direction)
+    c_sum = 0
+  print('Calculated magnitudes of vectors:')
+  print(magnitudes)
+  print('Calculated directions of vectors:')
+  print(directions)
+
+'''
 
 #Default parameters for handling execution loop:
 again_exec = True
