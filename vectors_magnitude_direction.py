@@ -147,6 +147,7 @@ def vectors_magnitude_calc(vectors):
     print('Calculations for vector-{0}:\nMagnitude = {1}\nNormalization = {2}'.format(index, vector.magnitude(), vector.normalized()))
     index += 1
 
+#Function for calculating dot production 
 '''
 def vectors_magnitude_calc(vectors):
   magnitudes = []
