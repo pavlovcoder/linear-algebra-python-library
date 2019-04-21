@@ -61,7 +61,6 @@ class Vector(object):
 
         except ValueError:
             raise ValueError('The coordinates must be nonempty')
-            consoe,
 
         except TypeError:
             raise TypeError('The coordinates must be an iterable')
