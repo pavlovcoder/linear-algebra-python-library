@@ -92,7 +92,7 @@ def vectors_loop_creating():
     vector_input_control = True
     while vector_input_control:
       #print("Please, enter all coordinates of the %d vector:" % vector_counter)
-      #print(f'Please, enter all coordinates of the {vector_counter}-vector:')
+      #print(f'Please, enter avecll coordinates of the {vector_counter}-vector:')
       #print(f"Please, enter all coordinates of the {vector_counter}-vector:")
       print("Please, enter all coordinates of the %d-vector" % vector_counter)
       vector = []

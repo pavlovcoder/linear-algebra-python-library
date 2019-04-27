@@ -59,11 +59,13 @@ class Vector(object):
     return 'Vector {}'.format(self.coordinates)
 
   def __eq__(self, v):
-    return self.coordinates = v.coordinates
+    return self.coordinates == v.coordinates
 
-#Function for loop-creating new vectors using users data:
-def vector_creating(name):
-  print('Please, enter all coordinates for %d-vector:\n' % name)
+V_length = 0
+#Function for loopV_lengthcreating new vectors using users data:
+def vector_creating(name, prev_len):
+  #print('Please, enter all coordinates for %d-vector:\n' % name)
+  print('Please, enter all coordinates for vector: ', name)
   vector = []
   coordinate_input_control = True
   coordinate_counter = 1
@@ -71,12 +73,24 @@ def vector_creating(name):
     while coordinate_input_control:
       print('Please, enter %d-st coordinate:' % coordinate_counter)
       vector.append(vector_coordinate_input(coordinate_counter))
+      print('Please, enter an appropriate command number for continuing:')
+      print('[1] - for adding a new coordinate to the vector;')
+      print('[2] - for complete adding new elements and start creating a new vector;')
       try:
         user_handle = int(input(">>>"))
+        if (user_handle == 1):
+          coordinate_counter = coordinate_counter + 1
+        else:
+          coordinate_input_control = False
+          V_length = len(vector)
+          print('You entered vector V {0} with {1} coordinates'.format(vector, V_length))
       except ValueError:
         print("You should enter a number [1] or [2] for handling. Please, try again...")
+      except SyntaxError:
+        print("Command number shouldn't be empty. Please, try again...")
   else:
     print('Vector')
+    print('Size of the previous vector = %d' % prev_len)
 
     
 
@@ -100,8 +114,9 @@ counter_exec = 0
 #Default loop for handling execution:
 while again_exec:
 
-  V = vector_creating('V')
-  W = vector_creating('W')
+  V = vector_creating('V', 0)
+  print(V);
+  W = vector_creating('W', len(V))
   again_exec = execution_loop()
   counter_exec = counter_exec + 1
 
