@@ -33,3 +33,17 @@ def custom_function():
         custom_function()
 
 custom_function()
+
+is_nice = True
+state = "nice" if is_nice else "not nice"
+
+X_train = X[0:split]
+X_test  = X[split:]
+y_train = y[0:split]
+y_test  = y[split:]
+
+grade = [random.random() for ii in range(0,n_points)]
+bumpy = [random.random() for ii in range(0,n_points)]
+
+X = [[gg, ss] for gg, ss in zip(grade, bumpy)]
+split = int(0.75*n_points)

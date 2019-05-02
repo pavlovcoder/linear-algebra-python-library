@@ -15,7 +15,9 @@ print(
   '-----------------------------------------'\
   )
 
+import os, sys
 import math
+import random
 
 #Default function for handling execution loop:
 def execution_loop():
@@ -165,8 +167,29 @@ while again_exec:
   W = vector_creating('W', vector_length)
   V = Vector(V)
   W = Vector(W)
-  v_production = []
-  print('1. V * W = {0}'.format(vectors_production(V, W, vector_length)))
+  v_production = vectors_production(V, W, vector_length)
+  math_statement = v_production / (V.magnitude() * W.magnitude())
+  try:
+    angle = math.acos(math_statement)
+  except:
+    print('Sorry, but your entered coordinates of vectors are too large...')
+  print('1. V * W = {0}'.format(v_production))
+  print('2. Angle between vectors V and W: {0}rad and {1}degree'.format(angle, math.degrees(angle)))
+  #Temporal data for testing a few lines of syntax on the Python:
+  '''
+  n_points = 10
+  split = int(0.75*n_points)
+  print('split = {0}'.format(split))
+  grade = [random.random() for ii in range(0, n_points)]
+  bumpy = [random.random() for ii in range(0, n_points)]
+  X = [[gg, ss] for gg, ss in zip(grade, bumpy)]
+  X_train = X[0:split]
+  X_test = X[split:]
+  print('X_train:')
+  print(X_train)
+  print('X_test:')
+  print(X_test)
+  '''
   again_exec = execution_loop()
   counter_exec = counter_exec + 1
 
