@@ -168,13 +168,15 @@ while again_exec:
   V = Vector(V)
   W = Vector(W)
   v_production = vectors_production(V, W, vector_length)
-  math_statement = v_production / (V.magnitude() * W.magnitude())
+  #math_statement = v_production / (V.magnitude() * W.magnitude())
+  math_statement = round((v_production / (V.magnitude() * W.magnitude())), 3)
   try:
-    angle = math.acos(math_statement)
+    #angle = math.acos(math_statement)
+    angle = round(math.acos(math_statement), 3)
   except:
     print('Sorry, but your entered coordinates of vectors are too large...')
   print('1. V * W = {0}'.format(v_production))
-  print('2. Angle between vectors V and W: {0}rad and {1}degree'.format(angle, math.degrees(angle)))
+  print('2. Angle between vectors V and W: {0} (rad) and {1} (degree)'.format(angle, round(math.degrees(angle), 3)))
   #Temporal data for testing a few lines of syntax on the Python:
   '''
   n_points = 10
@@ -190,6 +192,9 @@ while again_exec:
   print('X_test:')
   print(X_test)
   '''
+  vector = []
+  V = []
+  W = []
   again_exec = execution_loop()
   counter_exec = counter_exec + 1
 
