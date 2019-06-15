@@ -20,11 +20,11 @@ import os, sys, math
 #Default function for handling execution loop:
 def execution_loop():
     data = int(input("Do you want to try again ? Enter [1] - for continue / [0] - for quit : \n>>>"))
-    if data === 1:
+    if data == 1:
         return True
-    elif data === 0:
+    elif data == 0:
         return False
-    else
+    else:
         print('Error, you entered incorrect command. Please, try again...')
         execution_loop()
 
@@ -67,6 +67,16 @@ class Vector(object):
 
     def __eq__(self, v):
         return self.coordinates == v.coordinates
+
+# Function for loop-creating new vectors using user's data:
+def vectors_loop_creating():
+    vectors = []
+    vector_counter = 1
+    coordinate_counter = 1
+    vector_input_control = True
+    while vector_input_control:
+        print('Please, enter all coordinates of the %d-vector' % vector_counter)
+        # I'll continue from here...
 
 #Default parameters for handling execution loop:
 again_exec = True
