@@ -7,7 +7,7 @@ print(
 print(
   'Task:\n'\
   '-----------------------------------------\n'\
-  'Write a simple Python module for calculating dot productions and angles on the radians and degrees between two entered user\'s vectors (V) and (W):\n'
+  'Write a simple Python module for checking out parallelism or orthogonality of two entered vectors:\n'
   )
 
 print(
@@ -68,15 +68,62 @@ class Vector(object):
     def __eq__(self, v):
         return self.coordinates == v.coordinates
 
-# Function for loop-creating new vectors using user's data:
-def vectors_loop_creating():
+def vector_loop():
+    data = int(input("Do you want to add a new coordinate ? Enter:\n[2] - for adding a new coordinate;\n[1] - for adding a new vector;\n>>>"))
+    if data == 2:
+        return 2
+    elif data == 1:
+        return 1
+    else:
+        print("Error: you entered incorrect command. Please, try again...")
+        vector_loop()
+
+def vector_loop_max():
+    data = int(input("Do you want to add a new vector ? Enter: \n[1] - for adding a new vector;\n[0] - for exit\n>>>"))
+    if data == 1:
+        return 1
+    elif data == 0:
+        return 0
+    else:
+        print("Error: you entered incorrect command. Please, try again...")
+        vector_loop_max()
+
+# Function for creating a two vectors for verifying:
+def creating_vectors():
     vectors = []
-    vector_counter = 1
     coordinate_counter = 1
-    vector_input_control = True
-    while vector_input_control:
-        print('Please, enter all coordinates of the %d-vector' % vector_counter)
-        # I'll continue from here...
+    coordinate_input_control = True
+    print('Please, enter all coordinates of the vector A:')
+    vectors.append(Vector(coordinate_create('A')))
+    # I finished here (23.06.2019)
+    # I should use length of the previous vector A for limit a user for entering coordinate of the next vector B with the same length...
+    # print('Size of the previus vector: {0}'.format(len(Vector[0])))
+    print('Please, enter all coordinates of the vector B:')
+    vectors.append(Vector(coordinate_create('B')))
+    print('You entered vectors:')
+    print(vectors)
+    return vectors
+
+# Function for loop-creating all coordinates of the selected vector:
+def coordinate_create(name):
+    vector = []
+    coordinate_counter = 1
+    coordinate_input_control = True
+    while coordinate_input_control:
+        print("Please, enter {0}-st coordinate:".format(coordinate_counter))
+        vector.append(float(input(">>>")))
+        if len(vector) == 3:
+            print("You almost entered the maximum number of coordinates of the {0} vector. The maximum number of coordinates should be less of equal to 3.".format(name))
+            break
+        data = vector_loop()
+        if data == 2:
+            coordinate_input_control = True
+        else:
+            coordinate_input_control = False
+            break
+        coordinate_counter = coordinate_counter + 1
+    print("You entered vector {0} with coordinates: ".format(name))
+    return vector
 
 #Default parameters for handling execution loop:
 again_exec = True
@@ -85,9 +132,11 @@ counter_exec = 0
 #Default loop for handling execution:
 while again_exec:
     vectors = []
-    vectors = vectors_loop_creating()
+    vectors = creating_vectors()
+    again_exec = execution_loop()
+    counter_exec = counter_exec + 1
 
-    #The ent of execution:
+    #The end of execution:
     if again_exec == False:
         print('Program was executed: {0} times.'.format(counter_exec))
         break
