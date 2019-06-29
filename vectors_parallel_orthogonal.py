@@ -69,7 +69,7 @@ class Vector(object):
         return self.coordinates == v.coordinates
 
 def vector_loop():
-    data = int(input("Do you want to add a new coordinate ? Enter:\n[2] - for adding a new coordinate;\n[1] - for adding a new vector;\n>>>"))
+    data = int(input("Do you want to add a 3-th coordinate ? Enter:\n[2] - for adding a new coordinate;\n[1] - for adding a new vector;\n>>>"))
     if data == 2:
         return 2
     elif data == 1:
@@ -95,35 +95,57 @@ def creating_vectors():
     coordinate_input_control = True
     print('Please, enter all coordinates of the vector A:')
     vectors.append(Vector(coordinate_create('A')))
-    # I finished here (23.06.2019)
-    # I should use length of the previous vector A for limit a user for entering coordinate of the next vector B with the same length...
-    # print('Size of the previus vector: {0}'.format(len(Vector[0])))
     print('Please, enter all coordinates of the vector B:')
-    vectors.append(Vector(coordinate_create('B')))
-    print('You entered vectors:')
-    print(vectors)
+    vectors.append(Vector(coordinate_create('B', size=vectors[0].dimension)))
     return vectors
 
 # Function for loop-creating all coordinates of the selected vector:
-def coordinate_create(name):
+def coordinate_create(name, **kwargs):
     vector = []
     coordinate_counter = 1
     coordinate_input_control = True
+    size = kwargs.get('size', None)
     while coordinate_input_control:
         print("Please, enter {0}-st coordinate:".format(coordinate_counter))
         vector.append(float(input(">>>")))
         if len(vector) == 3:
             print("You almost entered the maximum number of coordinates of the {0} vector. The maximum number of coordinates should be less of equal to 3.".format(name))
             break
-        data = vector_loop()
-        if data == 2:
-            coordinate_input_control = True
-        else:
-            coordinate_input_control = False
-            break
+        elif len(vector) > 1:
+            if name == 'A':
+                data = vector_loop()
+                if data == 2:
+                    coordinate_input_control = True
+                else:
+                    coordinate_input_control = False
+                    break
+            else:
+                if size == 2:
+                    coordinate_input_control = False
+                    break
+                else:
+                    coordinate_input_control = True
         coordinate_counter = coordinate_counter + 1
-    print("You entered vector {0} with coordinates: ".format(name))
+    print("You entered vector {0} with coordinates: {1}".format(name, vector))
     return vector
+
+# Function for checking orthogonality and parallelism of the vectors:
+def isOrthogonal(vectors):
+    epsilon = 1e-10
+    size = vectors[0].dimension
+    if abs(scalar_product(vectors[0], vectors[1], size) / (size * size)) < epsilon:
+        print('Vectors A and B are orthogonal.')
+    elif scalar_product(vectors[0], vectors[1], size) / (size * size) > 1 - epsilon:
+        print('Vectors A and B are parallel.')
+    else:
+        print('Vectors A and B are not orthogonal and parallel.')
+
+# Function for calculating scalar production of the vectors:
+def scalar_product(A, B, size):
+    v_production = []
+    for index in range(size):
+        v_production.append(A.coordinates[index] * B.coordinates[index])
+    return sum(v_production)
 
 #Default parameters for handling execution loop:
 again_exec = True
@@ -133,6 +155,7 @@ counter_exec = 0
 while again_exec:
     vectors = []
     vectors = creating_vectors()
+    isOrthogonal(vectors)
     again_exec = execution_loop()
     counter_exec = counter_exec + 1
 

@@ -10,7 +10,6 @@ scalar_product(v1,v2)/(length(v1)*length(v2)) < -1 + epsilon
 def isOrthogonal(self,v,tolerance=1e-10):
     if abs(self.dotProduct(v)) < tolerance:
         return True
-
     return False
 
 # Function for loop-creating new vectors using user's data:
@@ -51,3 +50,26 @@ def vectors_loop_creating():
         print("You entered vector with coordinates: ", vector)
         vectors.append(Vector(vector))
     return vectors
+
+
+
+if data == 2:
+    coordinate_input_control = True
+else:
+    coordinate_input_control = False
+    break
+
+is_nice = True
+state = "nice" if is_nice else "not nice"
+
+def myfunc(a,b, *args, **kwargs):
+      c = kwargs.get('c', None)
+      d = kwargs.get('d', None)
+      #etc
+myfunc(a,b, c='nick', d='dog', ...)
+
+def vectors_production(V, W, size):
+      v_production = []
+  for index in range(size):
+    v_production.append(V.coordinates[index] * W.coordinates[index])
+  return sum(v_production)
