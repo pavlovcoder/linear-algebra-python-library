@@ -24,38 +24,38 @@ class UnAcceptedValueError(Exception):
     def __str__(self):
         return repr(self.data)
 
-# Module for creating a simple mathematical vectors on the dimension:
+#Module for creating a simple mathematical vectors on the dimension:
 class Vector(object):
-    def __init__(self, coordinates):
-        try:
-            if not coordinates:
-                raise ValueError
-            self.coordinates = tuple(coordinates)
-            self.dimension = len(coordinates)
+  def __init__(self, coordinates):
+    try:
+      if not coordinates:
+        raise ValueError
+      self.coordinates = tuple(coordinates)
+      self.dimension = len(coordinates)
 
-        except ValueError:
-            raise ValueError('The coordinate must be nonempty')
+    except ValueError:
+      raise ValueError('The coordinates must be nonempty')
 
-        except TypeError:
-            raise ValueError('The coordinates must be an iterable')
+    except TypeError:
+      raise ValueError('The coordinate must be an iterable')
 
-    def magnitude(self):
-        coordinates_squared = [x**2 for x in self.coordinates]
-        return math.sqrt(sum(coordinates_squared))
+  def magnitude(self):
+    coordinates_squared = [x**2 for x in self.coordinates]
+    return math.sqrt(sum(coordinates_squared)) 
 
-    def normalized(self):
-        try:
-            magnitude = self.magnitude()
-            return [x * (1 / magnitude) for x in self.coordinates]
+  def normalized(self):
+    try:
+      magnitude = self.magnitude()
+      return [x * (1 / magnitude) for x in self.coordinates]
+ 
+    except ZeroDivisionError:
+      raise Exception('Cannot normalize the zero vector.')
 
-        except ZeroDivisionError:
-            raise Exception('Cannot normalize the zero vector')
+  def __str__(self):
+    return 'Vector {}'.format(self.coordinates)
 
-    def __str__(self):
-        return 'Vector {}'.format(self.coordinates)
-
-    def __eq__(self, v):
-        return self.coordinates == v.coordinates
+  def __eq__(self, v):
+    return self.coordinates == v.coordinates
     
 # Default function for handling execution loop:\
 def execution_loop():
@@ -81,7 +81,7 @@ def creating_vectors():
 
 # Function for interable creating a next coordinate of the vector:
 def vector_loop(index):
-    data = int(input("Do you want to add a new {0}-th coordinate ? Enter :\n[2] - for adding a new coordinate;\n[1] - for adding a new vector;\n>>>"))
+    data = int(input("Do you want to add a new {0}-th coordinate ? Enter :\n[2] - for adding a new coordinate;\n[1] - for adding a new vector;\n>>>".format(index)))
     if data == 2:
         return 2
     elif data == 1:
@@ -97,14 +97,14 @@ def coordinate_create(name, **kwargs):
     coordinate_input_control = True
     size = kwargs.get('size', None)
     while coordinate_input_control:
-        print('Please, enter {0}-st coordinate:'.format(coordinate_counter))
-        break
+        # print('Please, enter {0}-st coordinate:'.format(coordinate_counter))
+        vector.append(vector_coordinate_input(coordinate_counter))
         if len(vector) == 3:
             print('You almost entered the maximum of coordinates of the {0} vector. The maximum number of coordinates should be less of equal to 3'.format(name))
             break
         elif len(vector) > 1:
             if name == 'A':
-                data = vector_loop()
+                data = vector_loop(2)
                 if data == 2:
                     coordinate_input_control = True
                 else:
@@ -119,6 +119,25 @@ def coordinate_create(name, **kwargs):
         coordinate_counter = coordinate_counter + 1
     print('You entered vector {0} with coordinates: {1}'.format(name, vector))
     return vector
+
+# Function for creating every new coordinate of the vector:
+def vector_coordinate_input(coordinate_counter):
+    c_counter = coordinate_counter
+    print('Please, enter {0}-st coordinate:'.format(c_counter))
+    try:
+        user_coordinate = float(input(">>>"))
+        print('user_coordinate:')
+        print(user_coordinate)
+        return user_coordinate
+    except SyntaxError:
+        print("You cannot leave coordinate-field empty. Please, try enter any number...")
+        vector_coordinate_input(c_counter)
+    except KeyboardInterrupt:
+        print("You cannot quit from the program here. Please, try enter any number...")
+        vector_coordinate_input(c_counter)
+    except:
+        print("Coordinate of the vector should be only number. Please, try enter any number...")
+        vector_coordinate_input(c_counter)
 
 # Default loop for handling execution:
 again_exec = True

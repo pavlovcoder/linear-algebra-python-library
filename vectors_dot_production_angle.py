@@ -54,13 +54,13 @@ class Vector(object):
 
   def magnitude(self):
     coordinates_squared = [x**2 for x in self.coordinates]
-    return math.sqrt(sum(coordinates_squared))
+    return math.sqrt(sum(coordinates_squared)) 
 
   def normalized(self):
     try:
       magnitude = self.magnitude()
       return [x * (1 / magnitude) for x in self.coordinates]
-
+ 
     except ZeroDivisionError:
       raise Exception('Cannot normalize the zero vector.')
 
@@ -83,7 +83,38 @@ def vector_creating(name, prev_len):
       vector_coordinate_input(coordinate_counter)
       #vector.append(vector_coordinate_input(coordinate_counter))
       if (vector_input_handler() == 1):
-        coordinate_counter = coordinate_counter + 1
+        coordinate_counter = coordinate_counter + 1#Module for creating a simple mathematical vectors on the dimension:
+class Vector(object):
+  def __init__(self, coordinates):
+    try:
+      if not coordinates:
+        raise ValueError
+      self.coordinates = tuple(coordinates)
+      self.dimension = len(coordinates)
+
+    except ValueError:
+      raise ValueError('The coordinates must be nonempty')
+
+    except TypeError:
+      raise ValueError('The coordinate must be an iterable')
+
+  def magnitude(self):
+    coordinates_squared = [x**2 for x in self.coordinates]
+    return math.sqrt(sum(coordinates_squared)) 
+
+  def normalized(self):
+    try:
+      magnitude = self.magnitude()
+      return [x * (1 / magnitude) for x in self.coordinates]
+ 
+    except ZeroDivisionError:
+      raise Exception('Cannot normalize the zero vector.')
+
+  def __str__(self):
+    return 'Vector {}'.format(self.coordinates)
+
+  def __eq__(self, v):
+    return self.coordinates == v.coordinates
         print('Vector after coordinate creating:')
         print(vector)
       else:
@@ -95,7 +126,7 @@ def vector_creating(name, prev_len):
     for coordinate in range(prev_len):
       vector_coordinate_input(coordinate_counter)
       print('Vector after coordinate creating:')
-      print(vector)
+      print(vector)-
       if (prev_len - coordinate_counter) != 0:
         print('You should still enter {0} coordinates.'.format(prev_len - coordinate_counter)) 
       coordinate_counter = coordinate_counter + 1
@@ -108,7 +139,7 @@ def vector_creating(name, prev_len):
   '''
 
 def vector_input_handler():
-  print('Please, enter an appropriate command number for continuing:')
+  print('Please, enter an appropriate command number for continuing:')j
   print('[1] - for adding a new coordinate to the vector;')
   print('[2] - for complete adding new elements and start creating a new vector;')
   try:
@@ -145,7 +176,7 @@ def vector_coordinate_input(coordinate_counter):
   except KeyboardInterrupt:
     print('You cannot quit from the program here. Please, try enter any number...')
     vector_coordinate_input(c_counter)
-  except:
+  except: 
     print('Coordinate of the vector should be only number. Please, try enter any number...')
     vector_coordinate_input(c_counter)
 
